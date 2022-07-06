@@ -1,3 +1,1 @@
-Week 1 Is simple. This was mostly regulation and mindset groundwork.
-
-
+Week 1 is simple. This was mostly baselining and mindset groundwork.
