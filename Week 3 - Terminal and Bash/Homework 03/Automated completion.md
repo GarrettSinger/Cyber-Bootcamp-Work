@@ -51,6 +51,7 @@ cd ../Dealer_Analysis/
 ​
 #Make file to hold temp data. Can you do this with Variables instead?
 mkdir ./TempFiles
+
 #Make Temp files with split data: Date and Times in question
 awk '{print $1}'  ../Player_Analysis/Dates_and_times > ./TempFiles/Dates
 awk '{print $2, $3}'  ../Player_Analysis/Dates_and_times > ./TempFiles/Times
