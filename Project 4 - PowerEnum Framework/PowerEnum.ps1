@@ -1,4 +1,4 @@
-Function Run-BootCampFinalProject{
+Function PowerEnum{
 <#  
 .SYNOPSIS
 Powershell Enumeration/Pentesting Framework
@@ -9,24 +9,27 @@ This is also a showcase of techniques in powershell scripting. This is not a fin
 Not covered by any warranty! User Beware!
 Free use is allowed. Please leave my name credited within the program even if it is not writen to output.
 
+.Link
+https://github.com/GarrettSinger/Cyber-Bootcamp-Work/blob/main/Project%204%20-%20PowerEnum%20Framework/PowerEnum.ps1
+
 .PARAMETER ErrorLog
 Specify a path to a file to log errors. The default is C:\Errors.txt
 
 .PARAMETER OutputPath
-Specify a path to where files wioll be stored when using this framework. The default is $env:USERPROFILE\appdata\local\Enum
+Specify a path to where files will be stored when using this framework. The default is $env:USERPROFILE\appdata\local\Enum
 
 .EXAMPLE
-PS C:\> Run-BootCampFinalProject
+PS C:\> PowerEnum
 
 Starts the Framework.
 
 .EXAMPLE
-PS C:\> Run-BootCampFinalProject -Errorlog c:\logs\errors.txt
+PS C:\> PowerEnum -Errorlog c:\logs\errors.txt
 
 This expression will write all errors to the designated log file. There is no logging by default.
 
 .EXAMPLE
-PS C:\> Run-BootCampFinalProject -OutputPath c:\windows\temp\EnumFiles
+PS C:\> PowerEnum -OutputPath c:\windows\temp\EnumFiles
 
 This expression will write all files to the designated folder path.
 #>
@@ -55,9 +58,9 @@ This expression will write all files to the designated folder path.
     	Clear
     	<# Check if help was asked for #>
     	if($help -eq $true -and $full -eq $false){
-        	get-help Run-BootCampFinalProject; Break
+        	get-help PowerEnum; Break
     	}elseif($help -eq $true -and $full -eq $true){
-        	get-help Run-BootCampFinalProject -full; Break
+        	get-help PowerEnum -full; Break
     	}
 
     	<# START Setup Environmet: #>
@@ -140,7 +143,6 @@ This expression will write all files to the designated folder path.
         	}
 
         	$SelectedOutputPath = CreateOutputFolder
-            move-item .\Run-BootCampFinalProject.ps1 $SelectedOutputPath -Force
             set-location $SelectedOutputPath
             new-item -ItemType Directory Modules
             
@@ -268,7 +270,7 @@ This expression will write all files to the designated folder path.
             	$FireFoxCommands = @(
                 	{Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache\* -Recurse -Force -EA SilentlyContinue}
                 	{Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache\*.* -Recurse -Force -EA SilentlyContinue}
-   		     	{Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache2\entries\*.* -Recurse -Force -EA SilentlyContinue}
+   		     	    {Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache2\entries\*.* -Recurse -Force -EA SilentlyContinue}
                 	{Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\thumbnails\* -Recurse -Force -EA SilentlyContinue}
                 	{Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\cookies.sqlite -Recurse -Force -EA SilentlyContinue}
                 	{Remove-Item -path $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\*.default\webappsstore.sqlite -Recurse -Force -EA SilentlyContinue}
@@ -305,21 +307,21 @@ This expression will write all files to the designated folder path.
             	$ChromeCommands = @(
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\cache\*" -Recurse -Force -EA SilentlyContinue -Verbose}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -EA SilentlyContinue -Verbose}
-   		 	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache2\entries\*" -Recurse -Force -EA SilentlyContinue -Verbose}
+   		 	    {Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache2\entries\*" -Recurse -Force -EA SilentlyContinue -Verbose}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cookies" -Recurse -Force -EA SilentlyContinue -Verbose}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Media Cache" -Recurse -Force -EA SilentlyContinue -Verbose}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cookies-Journal" -Recurse -Force -EA SilentlyContinue -Verbose}
-   		 	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\History" -Recurse -Force -EA SilentlyContinue -Verbose}
+   		 	    {Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\History" -Recurse -Force -EA SilentlyContinue -Verbose}
             	)
         	}elseif($($PSCmdlet.MyInvocation.BoundParameters["Verbose"].IsPresent) -eq $Null){
             	$ChromeCommands = @(
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\cache\*" -Recurse -Force -EA SilentlyContinue}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -EA SilentlyContinue}
-   		 	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache2\entries\*" -Recurse -Force -EA SilentlyContinue}
+   		 	    {Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache2\entries\*" -Recurse -Force -EA SilentlyContinue}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cookies" -Recurse -Force -EA SilentlyContinue}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Media Cache" -Recurse -Force -EA SilentlyContinue}
             	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cookies-Journal" -Recurse -Force -EA SilentlyContinue}
-   		 	{Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\History" -Recurse -Force -EA SilentlyContinue}
+   		 	    {Remove-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\History" -Recurse -Force -EA SilentlyContinue}
             	)
         	}
 
@@ -394,7 +396,7 @@ This expression will write all files to the designated folder path.
         	if((test-path $Destination) -eq $false){new-item $Destination -ItemType Directory -Force}
             	<# FireFox Commands #>
             	Copy-Item -path ((gci $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\ | ?{$_.name -like "*.default"} | gci | ?{$_.name -like "cache"}).FullName) -Recurse -Destination $Destination\ -Container -Force -EA SilentlyContinue -Verbose
-   		 	Copy-Item -path ((gci $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\ | ?{$_.name -like "*.default"} | gci | ?{$_.name -like "cache2"} | gci | ?{$_.name -like "entries"}).FullName) -Recurse -Destination $Destination\cache2\entries\ -Container -Force -EA SilentlyContinue -Verbose
+   		 	    Copy-Item -path ((gci $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\ | ?{$_.name -like "*.default"} | gci | ?{$_.name -like "cache2"} | gci | ?{$_.name -like "entries"}).FullName) -Recurse -Destination $Destination\cache2\entries\ -Container -Force -EA SilentlyContinue -Verbose
             	Copy-Item -path ((gci $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\ | ?{$_.name -like "*.default"} | gci | ?{$_.name -like "thumbnails"}).FullName) -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
             	Copy-Item -path ((gci $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\ | ?{$_.name -like "*.default"} | gci | ?{$_.name -like "cookies.sqlite"}).FullName) -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
             	Copy-Item -path ((gci $env:userprofile\AppData\Local\Mozilla\Firefox\Profiles\ | ?{$_.name -like "*.default"} | gci | ?{$_.name -like "webappsstore.sqlite"}).FullName) -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
@@ -405,11 +407,11 @@ This expression will write all files to the designated folder path.
             	<# Chrome Commands #>
             	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\cache\*" -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
             	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache\*" -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
-   		 	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache2\entries\*" -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
+   		 	    copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache2\entries\*" -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
             	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cookies" -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
             	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Media Cache" -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
             	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cookies-Journal" -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
-   		 	copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\History" -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
+   		 	    copy-Item -path "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\History" -Recurse -Destination  $Destination\ -Container -Force -EA SilentlyContinue -Verbose
 
         	$Destination = "$SelectedOutputPath\IE"
         	if((test-path $Destination) -eq $false){new-item $Destination -ItemType Directory -Force}
@@ -991,11 +993,11 @@ This expression will write all files to the designated folder path.
                 	clear
                 	<# Predefined list of available tools #>
                 	$OptionsInput = @(
-                        "OS-Info"
-                        "Installed services"
-                        "Disk-Info"
-                        "Disk Volume-Info"
-                        "Computer ID Essentials"
+                        "Get OS-Info"
+                        "Get Installed services"
+                        "Get Disk-Info"
+                        "Get Disk Volume-Info"
+                        "Get Computer ID Essentials"
                         "Get GPO Report"
                         "Enter Interactive Shell"
                         "Return to main menu"
@@ -1100,10 +1102,3 @@ This expression will write all files to the designated folder path.
 	<# End End Section #>
     
 }
-
-Run-BootCampFinalProject
-
-
-
-
-
