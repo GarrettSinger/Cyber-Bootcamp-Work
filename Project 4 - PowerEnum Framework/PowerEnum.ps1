@@ -446,14 +446,29 @@ This expression will write all files to the designated folder path.
 
     	    Function Get-InstalledApps{
    	 
-        	$GetArch = (Get-WMIObject win32_operatingSystem).OSArchitecture
+        	        	$GetArch = (Get-WMIObject win32_operatingSystem).OSArchitecture
 
         	if ($GetArch -like "*64*") {
            	 
             	$64RegKey = ("HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall")
-            	$Applications = Gci Registry::$64RegKey
+            	$64Applications = Gci Registry::$64RegKey
             	$Apps = @()
-            	Foreach($Item in ($Applications|?{($_).getvalue("DisplayName") -ne $null })){
+            	Foreach($Item in ($64Applications|?{($_).getvalue("DisplayName") -ne $null })){
+
+                	$App = [pscustomobject] @{
+               	 
+                    	"Display Name" = $Item.getvalue("Displayname")
+                    	"Version" = $Item.getvalue("DisplayVersion")
+                    	"UninstallString" = $Item.getvalue("UninstallString")
+                    	"Publisher" = $Item.getvalue("Publisher")
+                    	"Install Date" = $Item.getvalue("InstallDate")
+                	}
+                	$Apps += $App  
+            	}
+
+                $32RegKey = ("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
+            	$32Applications = Gci Registry::$32RegKey
+            	Foreach($Item in ($32Applications|?{($_).getvalue("DisplayName") -ne $null })){
 
                 	$App = [pscustomobject] @{
                	 
@@ -468,6 +483,28 @@ This expression will write all files to the designated folder path.
             	$Apps | export-csv $SelectedOutputPath\InstalledX64Apps.csv -NoTypeInformation
             	write-output "Applications csv file saved to $SelectedOutputPath\InstalledX64Apps.csv"
             	pause
+
+        	}else{
+           	 
+            	$32RegKey = ("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
+            	$32Applications = Gci Registry::$32RegKey
+            	$Apps = @()
+            	Foreach($Item in ($32Applications|?{($_).getvalue("DisplayName") -ne $null })){
+
+                	$App = [pscustomobject] @{
+               	 
+                    	"Display Name" = $Item.getvalue("Displayname")
+                    	"Version" = $Item.getvalue("DisplayVersion")
+                    	"UninstallString" = $Item.getvalue("UninstallString")
+                    	"Publisher" = $Item.getvalue("Publisher")
+                    	"Install Date" = $Item.getvalue("InstallDate")
+                	}
+                	$Apps += $App  
+            	}
+            	$Apps | export-csv $SelectedOutputPath\InstalledX32Apps.csv -NoTypeInformation
+            	write-output "Applications csv file saved to $SelectedOutputPath\InstalledX32Apps.csv"
+            	pause
+        	}
 
         	}else{
            	 
