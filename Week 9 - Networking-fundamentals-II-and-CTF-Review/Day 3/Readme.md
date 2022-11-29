@@ -1,0 +1,1 @@
+This is a CTF challenge day. No recorded answers here.

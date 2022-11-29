@@ -1,3 +1,2 @@
 This week, we started on the command-line in earnest. I scripted these class assignments and the homework assignment. These scripts can be used to complete all tasks or see how to complete the tasks in a way that is slightly more advanced than basic commands. 
 
-If you are just learning Linux, these assignments are great for memorization of commands through repetition. I wanted to challenge myself a little more though. 
